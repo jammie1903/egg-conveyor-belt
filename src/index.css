@@ -5,9 +5,267 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: grey;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App, #root, body, html {
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  display: flex;
+  align-content: center;
+}
+
+.App {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+  max-height: 800px;
+  max-width: 1000px;
+  min-height: 800px;
+  min-width: 1000px;
+  background: url('https://images.squarespace-cdn.com/content/v1/55665548e4b0b654e30f2ca1/1438978461836-6FR5SLMWZ7ECMOYDBLOC/ke17ZwdGBToddI8pDm48kP6S12d4JA7Ax1uarJIrTihZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI_VTwk8DLHL-sqwnTq7zBytEcssafHhFsyzr0GDZ5owk/candy_factory.jpg') no-repeat bottom;
+  background-size: cover;
+}
+
+.conveyor {
+  position: relative;
+  width: 1000px;
+  height: 300px;
+  margin-top: auto;
+}
+
+.conveyor:before {
+  content: '';
+  position: absolute;
+  width: 130%;
+  left: 0;
+  top: calc(100% - 110px);
+  height: 20px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #888,
+    #888 18px,
+    #777 18px,
+    #777 20px
+  );
+
+  animation-name: conveyorMovement;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes conveyorMovement {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: -30%;
+  }
+  100% {
+    left: -30%;
+  }
+}
+
+.conveyor:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: calc(100% - 90px);
+  height: 90px;
+  background-color: darkgrey;
+}
+
+.painter {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: calc(50% - 100px);
+  width: 200px;
+  height: 300px;
+  bottom: 400px;
+  background-color: grey;
+  box-shadow: inset 4px -4px 8px rgba(0,0,0,.5), inset -4px 4px 8px rgba(255,255,255,.5);
+  background-image: linear-gradient(225deg, rgba(255,255,255,.6) 0%, transparent 100%);
+
+  animation-name: painterMovement;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.painter::before {
+  content: '';
+  position: absolute;
+  top: -400px;
+  left: calc(50% - 75px);
+  height: 400px;
+  width: 150px;
+  background: darkgrey;
+  box-shadow: inset 4px -1px 8px rgba(0,0,0,.5), inset -4px 1px 8px rgba(255,255,255,.5);
+  background-image: linear-gradient(225deg, rgba(255,255,255,.6) 0%, transparent 100%);
+}
+
+@keyframes painterMovement {
+  0% {
+    bottom: 400px;
+  }
+  55% {
+    bottom: 400px;
+  }
+  60% {
+    bottom: 100px;
+  }
+  90% {
+    bottom: 100px;
+  }
+  95% {
+    bottom: 400px;
+  }
+}
+
+.egg {
+  width: 140px;
+  height: 200px;
+  position: relative;
+  margin: 0;
+
+	border-radius: 50%/60% 60% 40% 40%;
+  background-color: #6f3811;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+}
+
+.painter .egg {
+  width: 56px;
+  height: 80px;
+  flex-shrink: 0;
+  margin: 0 -10px;
+  z-index: 2;
+}
+
+.painter .egg:first-child {
+  transform: rotateZ(-14deg);
+  z-index: 1;
+  margin-bottom: 4px;
+}
+
+.painter .egg:last-child {
+  transform: rotateZ(14deg);
+  z-index: 1;
+  margin-bottom: 4px;
+}
+
+
+.conveyor .egg {
+  position: absolute;
+  top: 0;
+  left: calc(110% - 70px);
+  animation-name: eggMovement;
+  animation-duration: 25s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.conveyor .egg:nth-child(1) { animation-delay: -5s }
+.conveyor .egg:nth-child(2) { animation-delay: 0s }
+.conveyor .egg:nth-child(3) { animation-delay: 5s }
+.conveyor .egg:nth-child(4) { animation-delay: 10s }
+.conveyor .egg:nth-child(5) { animation-delay: 15s }
+
+@keyframes eggMovement {
+  0% {
+    left: calc(110% - 70px);
+  }
+  10% {
+    left: calc(80% - 70px);
+  }
+  20% {
+    left: calc(80% - 70px);
+  }
+  30% {
+    left: calc(50% - 70px);
+  }
+  40% {
+    left: calc(50% - 70px);
+  }
+  50% {
+    left: calc(20% - 70px);
+  }
+  60% {
+    left: calc(20% - 70px);
+  }
+  70% {
+    left: calc(-10% - 70px);
+  }
+  80% {
+    left: calc(-10% - 70px);
+  }
+  90% {
+    left: calc(-40% - 70px);
+  }
+  100% {
+    left: calc(-40% - 70px);
+  }
+}
+
+.egg .design {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%/60% 60% 40% 40%;
+  overflow: hidden;
+}
+
+.conveyor .egg .design {
+  animation-name: decoration;
+  animation-duration: 25s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.conveyor .egg .design::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%/60% 60% 40% 40%;
+  background-image: url("https://www.transparenttextures.com/patterns/white-leather.png");
+}
+
+.conveyor .egg:nth-child(1) .design { animation-delay: -5s }
+.conveyor .egg:nth-child(2) .design { animation-delay: 0s }
+.conveyor .egg:nth-child(3) .design { animation-delay: 5s }
+.conveyor .egg:nth-child(4) .design { animation-delay: 10s }
+.conveyor .egg:nth-child(5) .design { animation-delay: 15s }
+
+@keyframes decoration {
+  0% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 0;
+  }
+  36% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.conveyor .egg .light {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%/60% 60% 40% 40%;
+  box-shadow: inset 20px -25px 40px rgba(0,0,0,.5);
+  background-image: radial-gradient(65% 65% at 70% 25%, rgba(255,255,220,.8) 0%, rgba(255,255,220,.4) 35%, transparent 100%);
 }
